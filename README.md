@@ -1,3 +1,9 @@
+# Working progress
+- Create the landing page (home)
+- Create the production detail page based off of query to back end
+- Create a sign in for Leah to get access to a form to insert new pictures
+- Modify the color scheme
+
 # Create T3 App
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.

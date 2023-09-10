@@ -11,29 +11,33 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model PageDetails {
+model Production {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     title     String  @db.VarChar(255)
     location  String  @db.VarChar(255)
+    year      String  @db.VarChar(255)
     director  String  @db.VarChar(255)
     scenicDesigner  String  @db.VarChar(255)
     photo  String  @db.VarChar(255)
     link  String  @db.VarChar(255)
+    description  String  @db.VarChar(510) @default("Describe the role that she has for this job. Any note worthy things that happened. Then further down we will have the pictures with what she did.")
+    pictures Picture[]
+	@@map("PageDetails")
 }
 
+// Ultimately I want to search using the production, but it isn't working so temporary fix
 model Picture {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    url       String  @db.VarChar(255)
-    // TODO firgure out how to do a relationship between picture and page details
-    // locationId String
-    // location  PageDetails @relation(fields: [locationId], references: [id])
-    // @@index([locationId], name: "locationId")
-    // labels
-    size      String  @db.VarChar(255)
-    description String @db.VarChar(255)
-    link      String  @db.VarChar(255)
+    url       String  @db.VarChar(255) @default("https://picsum.photos/200/300")
+    title String  @db.VarChar(255)
+    width     Int     @db.Int @default(200)
+    height    Int     @db.Int @default(300)
+    production Production @relation(fields: [productionId], references: [id])
+    productionId String
+    @@index([productionId], name: "productionId")
+    description String @db.VarChar(255) @default("Describe the photo and the significance of it.")
 }
