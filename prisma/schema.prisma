@@ -11,16 +11,29 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Star {
-  id              Int       @default(autoincrement()) @id
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  name            String    @db.VarChar(255)
-  constellation   String    @db.VarChar(255)
-}
-
-model Example {
+model PageDetails {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+    title     String  @db.VarChar(255)
+    location  String  @db.VarChar(255)
+    director  String  @db.VarChar(255)
+    scenicDesigner  String  @db.VarChar(255)
+    photo  String  @db.VarChar(255)
+    link  String  @db.VarChar(255)
+}
+
+model Picture {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    url       String  @db.VarChar(255)
+    // TODO firgure out how to do a relationship between picture and page details
+    // locationId String
+    // location  PageDetails @relation(fields: [locationId], references: [id])
+    // @@index([locationId], name: "locationId")
+    // labels
+    size      String  @db.VarChar(255)
+    description String @db.VarChar(255)
+    link      String  @db.VarChar(255)
 }
